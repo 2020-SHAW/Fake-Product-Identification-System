@@ -68,10 +68,10 @@ You can also interact with the system via API:
 ## Technologies Used
 
 - **Frontend**: React, HTML5, CSS3, JavaScript
-- **Backend**: Node.js, Express
+- **Backend**: Node.js, Django, GO
 - **Machine Learning**: Python, TensorFlow/Keras
 - **Blockchain**: Ethereum, Smart Contracts
-- **Database**: MongoDB
+- **Database**: MySQL
 
 
 ## Contributing
