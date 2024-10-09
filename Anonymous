@@ -1,0 +1,46 @@
+// src/ScannerPage.js
+import React, { useState } from 'react';
+import QRReader from 'react-qr-reader';
+import axios from 'axios';
+import { useHistory } from 'react-router-dom';
+
+const ScannerPage = () => {
+  const [loading, setLoading] = useState(false);
+  const history = useHistory();
+
+  const handleScan = async (data) => {
+    if (data) {
+      setLoading(true);
+      try {
+        const response = await axios.post('/api/validate-product', { qrCode: data });
+        setLoading(false);
+        history.push('/result', { product: response.data });
+      } catch (error) {
+        setLoading(false);
+        console.error("Error validating product:", error);
+        // Optionally handle error state
+      }
+    }
+  };
+
+  const handleError = (err) => {
+    console.error(err);
+  };
+
+  return (
+    <div>
+      {loading ? (
+        <div>Loading...</div>
+      ) : (
+        <QRReader
+          delay={300}
+          onError={handleError}
+          onScan={handleScan}
+          style={{ width: '100%' }}
+        />
+      )}
+    </div>
+  );
+};
+
+export default ScannerPage;
